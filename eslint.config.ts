@@ -12,7 +12,7 @@ export default tseslint.config(
         },
     },
     {
-        ignores: ['dist', 'node_modules', 'coverage', 'eslint.config.js'],
+        ignores: ['dist', 'node_modules', 'coverage', 'eslint.config.ts'],
     },
     {
         languageOptions: {
@@ -23,7 +23,6 @@ export default tseslint.config(
             },
             parserOptions: {
                 project: ['./tsconfig.json'],
-                tsconfigRootDir: process.cwd(),
             },
         },
         settings: {
@@ -37,11 +36,10 @@ export default tseslint.config(
     {
         files: ['src/**/*.ts'],
         rules: {
-            // ---- stylistic rules ----
             '@stylistic/semi': ['error', 'always'],
-            '@stylistic/quotes': ['error', 'single'],
+            '@stylistic/quotes': ['error', 'double'],
             '@stylistic/arrow-parens': ['error', 'as-needed'],
-            '@stylistic/comma-dangle': ['error', 'always-multiline'],
+            "@stylistic/comma-dangle": ["error", "never"],
             '@stylistic/indent': ['error', 4],
             '@stylistic/object-curly-spacing': ['error', 'always'],
             '@stylistic/space-before-function-paren': ['error', 'never'],
@@ -55,7 +53,7 @@ export default tseslint.config(
                 { blankLine: 'always', prev: '*', next: 'if' },
                 { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
                 { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
-       
+
                 { blankLine: 'always', prev: 'export', next: '*' },
                 { blankLine: 'never', prev: 'export', next: 'export' },
                 { blankLine: 'always', prev: 'function', next: '*' },
@@ -64,11 +62,20 @@ export default tseslint.config(
                 { blankLine: 'always', prev: '*', next: 'function' },
                 { blankLine: 'always', prev: 'function', next: '*' },
             ],
-            '@stylistic/padded-blocks': ['error', 'always'],
-            '@stylistic/lines-between-class-members': ['error', 'always'],
+            '@stylistic/padded-blocks': ['error', 'never'],
+            '@stylistic/lines-between-class-members': ['error',
+                {
+                    enforce: [
+                        { blankLine: "always", prev: "method", next: "field" },
+                        { blankLine: "always", prev: "field", next: "method" },
+                        { blankLine: "always", prev: "method", next: "method" },
+                        { blankLine: "never", prev: "field", next: "field" }
+                    ]
+                },
+            ],
             'no-duplicate-imports': ["error", { "includeExports": true }],
-            // ---- custom rules ----
             'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
+            "@stylistic/curly-newline": ["error", { "minElements": 1 }],
             'prefer-const': 'error',
             'no-debugger': 'warn',
             'no-var': 'error',
@@ -105,5 +112,11 @@ export default tseslint.config(
                 },
             ],
         },
+    },
+    {
+    files: ['src/middleware/**/*.ts'],
+    rules: {
+        'max-params': ['error', 3]
     }
+},
 );
