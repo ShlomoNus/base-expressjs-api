@@ -6,13 +6,10 @@ import cors from 'cors';
 import 'express-async-errors';
 import userAgent from 'express-useragent';
 import cookieParser from 'cookie-parser';
-import { Route } from 'sn-types-backend';
-import { Optional } from 'sn-types-general';
 
 const app = express();
 
-export async function server(port: number, routes: Route[]): Promise<Optional<http.Server>> {
-    try {
+export  function createServer(port: number): http.Server{
         app.use(helmet());
         app.use(userAgent.express());
         app.use(cors());
@@ -25,9 +22,5 @@ export async function server(port: number, routes: Route[]): Promise<Optional<ht
         return http.createServer(app).listen(port, () => {
             console.info(`Express with Typescript! http://localhost:${port}`);
         });
-    } catch (error) {
-        console.info(error);
 
-        return null;
-    }
 }
