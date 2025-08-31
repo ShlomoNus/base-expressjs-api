@@ -1,7 +1,6 @@
 import { Server } from 'http';
 import { CONFIG } from './config';
 import { server } from './server';
-import { routes } from '@routes/main';
 
 const port = CONFIG.Port || 3000;
 
