@@ -3,7 +3,6 @@ import express, { json, urlencoded } from 'express';
 import compression from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
-import 'express-async-errors';
 import userAgent from 'express-useragent';
 import cookieParser from 'cookie-parser';
 
@@ -17,6 +16,7 @@ export  function createServer(port: number): http.Server{
         app.use(compression());
         app.use(json());
 
+        console.info('Express with Typescript!');
         app.use(urlencoded({ extended: false }));
 
         return http.createServer(app).listen(port, () => {

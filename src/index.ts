@@ -22,6 +22,7 @@ async function gracefulShutdown(serverInstance: Server) {
         console.error('Error during graceful shutdown:', error);
     }
 }
+console.info('Starting server...');
 
 async function run(httpServer: Server) {
 
