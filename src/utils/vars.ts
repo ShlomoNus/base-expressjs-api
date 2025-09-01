@@ -1,6 +1,8 @@
-import dotenv from 'dotenv';
-import { join } from 'path';
-import { mainDirectory } from './path';
+import { join } from "path";
+
+import dotenv from "dotenv";
+
+import { mainDirectory } from "./path";
 
 function loadEnvFiles() {
     const envPath = join(mainDirectory, `.env.${process.env.NODE_ENV}`);

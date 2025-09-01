@@ -1,7 +1,7 @@
-import { dirname, join } from 'path';
+import { dirname, join } from "path";
 
 const entryPointDirectory = dirname(require.main!.filename);
 
-const mainDirectory = join(entryPointDirectory, '..');
+const mainDirectory = join(entryPointDirectory, "..");
 
 export { mainDirectory, entryPointDirectory };
