@@ -1,21 +1,23 @@
-import inquirer from 'inquirer';
-import fs from 'fs';
-import path from 'path';
-import { convertToError } from './types';
-import { mainDirectory } from './path';
+import fs from "fs";
+import path from "path";
 
-const generateRouteFile = async () => {
+import inquirer from "inquirer";
+
+import { mainDirectory } from "./path";
+import { convertToError } from "./types";
+
+const generateRouteFile = async() => {
     try {
         const { givenName } = await inquirer.prompt<{ givenName: string }>([
             {
-                type: 'input',
-                name: 'givenName',
-                message: 'Enter the name for the route:',
-                validate: input => (input ? true : 'Name cannot be empty'),
-            },
+                type: "input",
+                name: "givenName",
+                message: "Enter the name for the route:",
+                validate: input => (input ? true : "Name cannot be empty")
+            }
         ]);
 
-        const dirPath = path.join(mainDirectory, 'src', 'routes', givenName);
+        const dirPath = path.join(mainDirectory, "src", "routes", givenName);
         const filePath = path.join(dirPath, `${givenName}.ts`);
 
         if (!fs.existsSync(dirPath)) {
@@ -36,12 +38,12 @@ applyRoutes({ app: ${givenName}Router, routes });
 export { ${givenName}Router };
     `.trim();
 
-        fs.writeFileSync(filePath, fileContent, 'utf8');
-        console.log(`Route file created: ${filePath}`);
-    } catch (error: unknown) {
+        fs.writeFileSync(filePath, fileContent, "utf8");
+        console.info(`Route file created: ${filePath}`);
+    } catch(error: unknown) {
         const typedError = convertToError(error);
 
-        console.error('Error creating route file:', typedError.message);
+        console.error("Error creating route file:", typedError.message);
     }
 };
 

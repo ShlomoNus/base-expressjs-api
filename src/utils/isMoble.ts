@@ -1,4 +1,4 @@
-import { CustomRequest } from 'sn-types-backend';
+import { CustomRequest } from "sn-types-backend";
 
 export function isMoblieValidator(req: CustomRequest) {
     const ua = req.useragent;
