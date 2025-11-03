@@ -1,32 +1,55 @@
 {
     "compilerOptions": {
-        "declaration": true,
-        "target": "es2022",
-        "module": "commonjs",
+        "rootDir": "./src",
         "outDir": "./dist",
-        "strict": true,
-        "noImplicitAny": true,
+        "module": "nodenext",
+        "target": "esnext",
+        "types": [
+            "node"
+        ],
         "sourceMap": true,
-        "esModuleInterop": true,
+        "declaration": true,
+        "declarationMap": true,
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true,
+        "strict": true,
+        "noUncheckedSideEffectImports": true,
+        "moduleDetection": "force",
         "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
+        "emitDeclarationOnly": true,
         "baseUrl": ".",
         "paths": {
-            "@utils/*": ["src/utils/*"],
-            "@routes/*": ["src/routes/*"],
-            "@repository/*": ["src/repository/*"],
-            "@models/*": ["src/models/*"],
-            "@middleware/*": ["src/middleware/*"],
-            "@handlers/*": ["src/handlers/*"],
-            "@src/*": ["src/*"]
+            "@utils/*": [
+                "src/utils/*"
+            ],
+            "@routes/*": [
+                "src/routes/*"
+            ],
+            "@repository/*": [
+                "src/repository/*"
+            ],
+            "@models/*": [
+                "src/models/*"
+            ],
+            "@middleware/*": [
+                "src/middleware/*"
+            ],
+            "@handlers/*": [
+                "src/handlers/*"
+            ],
+            "@src/*": [
+                "src/*"
+            ]
         }
     },
     "include": [
         "src/**/*",
-        "eslint.config.ts",
         "jest.config.js",
         "jest.config.ts",
         "jest.setup.ts"
     ],
-    "exclude": ["node_modules", "build"]
+    "exclude": [
+        "node_modules",
+        "build"
+    ]
 }

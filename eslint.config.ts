@@ -1,37 +1,19 @@
-import globals from 'globals';
+import { defineConfig } from 'eslint/config'; 
 import stylistic from '@stylistic/eslint-plugin';
 import importPlugin from 'eslint-plugin-import-x';
 import tseslint from 'typescript-eslint';
-/** @type {import('eslint').Linter.FlatConfig[]} */
-export default tseslint.config(
+import globals from 'globals';
+
+export default defineConfig([ 
     {
         plugins: {
             '@typescript-eslint': tseslint.plugin,
             '@stylistic': stylistic,
-            import: importPlugin,
+            import: importPlugin as any,
         },
     },
     {
-        ignores: ['dist', 'node_modules', 'coverage', 'eslint.config.ts'],
-    },
-    {
-        languageOptions: {
-            parser: tseslint.parser,
-            globals: {
-                ...globals.node,
-                ...globals.es2025,
-            },
-            parserOptions: {
-                project: ['./tsconfig.json'],
-            },
-        },
-        settings: {
-            'import/resolver': {
-                typescript: {
-                    project: './tsconfig.json',
-                },
-            },
-        },
+        ignores: ['dist', 'node_modules', 'coverage', 'eslint.config.js'],
     },
     {
         files: ['src/**/*.ts'],
@@ -74,7 +56,7 @@ export default tseslint.config(
                 },
             ],
             'no-duplicate-imports': ["error", { "includeExports": true }],
-            'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
+            'no-console': ['error', { allow: ['warn', 'error', 'info', 'time', 'timeEnd'] }],
             "@stylistic/curly-newline": ["error", { "minElements": 1 }],
             'prefer-const': 'error',
             'no-debugger': 'warn',
@@ -113,10 +95,23 @@ export default tseslint.config(
             ],
         },
     },
-    {
-    files: ['src/middleware/**/*.ts'],
-    rules: {
-        'max-params': ['error', 3]
-    }
-},
-);
+          {
+        languageOptions: {
+            parser: tseslint.parser,
+            globals: {
+                ...globals.node,
+                ...globals.es2025,
+            },
+            parserOptions: {
+                project: ['./tsconfig.json'],
+            },
+        },
+        settings: {
+            'import/resolver': {
+                typescript: {
+                    project: './tsconfig.json',
+                },
+            },
+        },
+    },
+]);
